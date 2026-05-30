@@ -44,10 +44,8 @@ jobs:
       - name: Update feeds
         run: ./scripts/feeds update -a 2>&1
 
-      - name: Install feeds
-        run: |
-          ./scripts/feeds install -a 2>&1
-          echo "Exit code: $?"
+      - name: Install feeds verbose
+        run: ./scripts/feeds install -a -v 2>&1
 
       - name: Apply custom config
         run: make defconfig
