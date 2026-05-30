@@ -35,7 +35,7 @@ jobs:
 
       - name: Add custom feeds
         run: |
-          # 4IceG feeds
+          # 4IceG feed
           echo "src-git sms_tool https://github.com/4IceG/luci-app-sms-tool-js.git" >> feeds.conf.default
           echo "src-git modeminfo https://github.com/4IceG/modeminfo.git" >> feeds.conf.default
           echo "src-git atinout https://github.com/4IceG/luci-app-atinout-mod.git" >> feeds.conf.default
