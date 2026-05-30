@@ -1,0 +1,27 @@
+From: OpenWrt Community <openwrt@openwrt.org>
+Date: Sat, 30 May 2026 00:00:00 +0000
+Subject: [PATCH] arm64: dts: qcom: ipq5018: add NSS reserved memory
+
+The IPQ5018 SoC has a dedicated NSS (Network Subsystem) hardware
+acceleration block. Despite NSS not being fully supported upstream,
+the memory region it uses needs to be reserved for stability reasons,
+analogous to what was done for IPQ6018 in patch 0135.
+
+NSS on IPQ5018 uses a 16MB region starting at 0x40000000.
+
+Signed-off-by: OpenWrt Community <openwrt@openwrt.org>
+---
+--- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+@@ -136,6 +136,11 @@
+ 		#size-cells = <2>;
+ 		ranges;
+ 
++		nss_region: memory@40000000 {
++			reg = <0x0 0x40000000 0x0 0x01000000>;
++			no-map;
++		};
++
+ 		tz_apps@4a400000 {
+ 			reg = <0x0 0x4a400000 0x0 0x400000>;
+ 			no-map;

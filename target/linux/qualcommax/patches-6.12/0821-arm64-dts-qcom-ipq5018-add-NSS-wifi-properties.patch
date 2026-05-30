@@ -1,0 +1,24 @@
+From: OpenWrt Community <openwrt@openwrt.org>
+Date: Sat, 30 May 2026 00:00:00 +0000
+Subject: [PATCH] arm64: dts: qcom: ipq5018: add NSS properties to wifi node
+
+Add NSS-related properties to the IPQ5018 wifi node:
+- memory-region phandle pointing to nss_region
+- qcom,nss-radio-priority for NSS offload scheduling
+
+These properties are required by the qca-nss-drv and ath11k-nss
+modules from the NSS packages feed.
+
+Signed-off-by: OpenWrt Community <openwrt@openwrt.org>
+---
+--- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+@@ -739,6 +739,8 @@
+ 		wifi: wifi@c000000 {
+ 			compatible = "qcom,ipq5018-wifi";
+ 			reg = <0x0c000000 0x1000000>;
++			memory-region = <&nss_region>;
++			qcom,nss-radio-priority = <0>;
+ 
+ 			interrupts = <GIC_SPI 288 IRQ_TYPE_EDGE_RISING>,
+ 
