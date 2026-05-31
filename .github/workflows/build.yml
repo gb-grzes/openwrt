@@ -44,8 +44,32 @@ jobs:
       - name: Update feeds
         run: ./scripts/feeds update -a 2>&1
 
-      - name: Install feeds verbose
-        run: ./scripts/feeds install -a -v 2>&1
+      - name: Install standard feeds
+        run: |
+          echo "=== Installing packages feed ==="
+          ./scripts/feeds install -p packages -a 2>&1 || true
+          echo "=== Installing luci feed ==="
+          ./scripts/feeds install -p luci -a 2>&1 || true
+          echo "=== Installing routing feed ==="
+          ./scripts/feeds install -p routing -a 2>&1 || true
+
+      - name: Install 4IceG feeds
+        run: |
+          echo "=== Installing sms_tool ==="
+          ./scripts/feeds install -p sms_tool -a 2>&1
+          echo "=== Installing modeminfo ==="
+          ./scripts/feeds install -p modeminfo -a 2>&1
+          echo "=== Installing atinout ==="
+          ./scripts/feeds install -p atinout -a 2>&1
+          echo "=== Installing exigo_hub ==="
+          ./scripts/feeds install -p exigo_hub -a 2>&1
+
+      - name: Install NSS feeds
+        run: |
+          echo "=== Installing nss_packages ==="
+          ./scripts/feeds install -p nss_packages -a 2>&1
+          echo "=== Installing sqm_scripts_nss ==="
+          ./scripts/feeds install -p sqm_scripts_nss -a 2>&1
 
       - name: Apply custom config
         run: make defconfig
