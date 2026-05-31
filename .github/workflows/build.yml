@@ -32,10 +32,14 @@ jobs:
             libncurses-dev libssl-dev python3-setuptools \
             rsync unzip zlib1g-dev file wget
 
+      - name: Configure git credentials
+        run: |
+          git config --global url."https://${{ github.token }}@github.com/".insteadOf "https://github.com/"
+
       - name: Add custom feeds
         run: |
           echo "src-git sms_tool https://github.com/4IceG/luci-app-sms-tool-js.git" >> feeds.conf.default
-          echo "src-git modeminfo https://github.com/4IceG/modeminfo.git" >> feeds.conf.default
+          echo "src-git modeminfo https://github.com/4IceG/luci-app-modeminfo.git" >> feeds.conf.default
           echo "src-git atinout https://github.com/4IceG/luci-app-atinout-mod.git" >> feeds.conf.default
           echo "src-git exigo_hub https://github.com/4IceG/luci-app-exigo-hub-d50-5g.git" >> feeds.conf.default
           echo "src-git nss_packages https://github.com/qosmio/nss-packages.git;NSS-12.5-K6.x-wwan" >> feeds.conf.default
